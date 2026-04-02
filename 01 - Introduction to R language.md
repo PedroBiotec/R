@@ -256,7 +256,7 @@ b   12   14   16   18   20
 [2,] 3 16
 ```
 ### Dataframes
-São como bancos de dados, as coluas são variáveis e as linhas são os registros.
+São como bancos de dados, as colunas são variáveis e as linhas são os registros.
 - Criando um dataframe: data.frame(nome_do_dataframe)
 - Exibindo as primeiras observações: head(nome_do_dataframe)
 - Exibindo as últimas observações: tail(nome_do_dataframe)
@@ -324,4 +324,127 @@ São como bancos de dados, as coluas são variáveis e as linhas são os registr
 [1] "factor"
 > dados$Sepal.Length[1]
 [1] 5.1
+```
+### Listas:
+São objetos mais flexiveis, porém são mais complicadas no quesito de manipulação de dados. Elas abragem todos os formatos
+```R
+> lista <- list(c(12,22,33), c("aei", "iou"), metadados_pac)
+> lista
+[[1]]
+[1] 12 22 33
+
+[[2]]
+[1] "aei" "iou"
+
+[[3]]
+  paciente idade      sexo fumante
+1      a01     4 masculino    TRUE
+2      a02    48  feminino   FALSE
+3      a03    65 masculino   FALSE
+4      a04    54  feminino    TRUE
+5      a05    72 masculino    TRUE
+
+> lista[[2]]
+[1] "aei" "iou"
+> lista[2]
+[[1]]
+[1] "aei" "iou"
+> texto <- lista[[1]]
+> texto
+[1] 12 22 33
+```
+
+### Exercícios:
+```R
+> # 1 Exercício: Valor de tempo máximo, mínimo, média dos tempos de reações, tota de reações e o somatório de todos os tempos com os números 10, 12, 5, 7, 9, 10, 11, 5, 9, 8
+> tempos <- c(10,12,5,7,9,10,11,5,9,8)
+> max(tempos)
+[1] 12
+> min(tempos)
+[1] 5
+> mean(tempos)
+[1] 8.6
+> length(tempos)
+[1] 10
+> sum(tempos)
+[1] 86
+> #2 Exercício: somar, subtrair, multiplicar, dividir e potenciar os valores de dois objetos, sendo eles a = 1, 5, 9 e 7 e b = 3, 5, 7, e 9. 
+> a <- c(3,5,7,9)
+> b <- c(1,5,9,7)
+> a+b
+[1]  4 10 16 16
+> a-b
+[1]  2  0 -2  2
+> a*b
+[1]  3 25 63 63
+> b*a
+[1]  3 25 63 63
+> a/b
+[1] 3.0000000 1.0000000 0.7777778
+[4] 1.2857143
+> a^b
+[1]        3     3125 40353607
+[4]  4782969
+
+> #3 Exercício: Três amostras realizadas em triplicata, criem 3 variaveis que guardem o valor para cada amostra
+> amostra1 <- c(1,2,3)
+> amostra2 <- c(4,5,6)
+> amostra3 <- c(7,8,9)
+> amostras <- matrix(data = c(amostra1, amostra2, amostra3)
++ nrow(3)
+Error: unexpected symbol in:
+"amostras <- matrix(data = c(amostra1, amostra2, amostra3)
+nrow"
+
+> amostras <- matrix(data = c(amostra1, amostra2, amostra3),nrow(3))
+Error in matrix(data = c(amostra1, amostra2, amostra3), nrow(3)) : 
+  non-numeric matrix extent
+
+> amostras <- matrix(data = c(amostra1, amostra2, amostra3),nrow =3)
+> amostras
+     [,1] [,2] [,3]
+[1,]    1    4    7
+[2,]    2    5    8
+[3,]    3    6    9
+> amostras <- rbind(amostra1,amostra2,amostra3)
+> amostras
+         [,1] [,2] [,3]
+amostra1    1    2    3
+amostra2    4    5    6
+amostra3    7    8    9
+> colnames(amostras) <- c("rep 1", "rep 2", "rep 3")
+> amostras
+         rep 1 rep 2 rep 3
+amostra1     1     2     3
+amostra2     4     5     6
+amostra3     7     8     9
+
+> #4 Exercício: Calcular o IMC a partir dos objetos: massa = 75,65,63,52,7. altura = 1.71, 1.69, 1.65, 1.65, 1.75. IMC = massa/(altura)^2
+> massa <- c(75,65,63,52,79)
+> altura <- c(1.71,1.69,1.65,1.65,1.75)
+> massa/(altura)^2
+[1] 25.64892 22.75831 23.14050
+[4] 19.10009 25.79592
+
+> #6 Exercício: Criar uma matriz com 3 linhas, 4 colunas e q seja ordenada pelas linhas com os valores 1,2,3,-1,-1,0,2,2,-1,3,2
+> ?matrix
+> matrix(data = c(1))
+     [,1]
+[1,]    1
+> matrix(data = c(1,2,3,-1,-1,0,2,2,-1,3,2), nrow = 3, ncol = 4, byrow = TRUE)
+     [,1] [,2] [,3] [,4]
+[1,]    1    2    3   -1
+[2,]   -1    0    2    2
+[3,]   -1    3    2    1
+Warning message:
+In matrix(data = c(1, 2, 3, -1, -1, 0, 2, 2, -1, 3, 2), nrow = 3,  :
+  data length [11] is not a sub-multiple or multiple of the number of rows [3]
+
+> matrix(data = c(1,2,3,-1,-1,1,0,2,2,-1,3,2), nrow = 3, ncol = 4, byrow = TRUE)
+     [,1] [,2] [,3] [,4]
+[1,]    1    2    3   -1
+[2,]   -1    1    0    2
+[3,]    2   -1    3    2
+
+> #7 Exercício: acessar o banco de dados DBO e ver dimensões, nomes das variaveis, usando funções
 ```
